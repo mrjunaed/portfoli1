@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junaed Al Rabby - Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom font import for a professional look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Base styles for Light Theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            color: #1f2937; /* Gray-800 */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #10b981 0%, #064e3b 100%);
+        }
+        .card {
+            background-color: #ffffff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .text-secondary {
+            color: #064e3b;
+        }
+        .text-gray-700 {
+            color: #374151;
+        }
+
+        /* Styles for Dark Theme */
+        .dark body {
+            background-color: #111827; /* Gray-900 */
+            color: #f3f4f6; /* Gray-100 */
+        }
+        .dark .header-bg {
+            background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+        }
+        .dark .card {
+            background-color: #1f2937; /* Gray-800 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            border-color: #374151; /* Gray-700 */
+        }
+        .dark .text-gray-700 {
+            color: #d1d5db; /* Gray-300 */
+        }
+        .dark .text-secondary {
+            color: #34d399; /* Emerald-400 */
+        }
+        .dark .skill-pill {
+            background-color: #10b98133;
+            color: #34d399;
+        }
+        .dark .skill-pill:hover {
+            background-color: #10b981;
+            color: #ffffff;
+        }
+        .dark .list-outside > li::marker {
+            color: #34d399;
+        }
+
+        /* Shared Styles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 60%;
+            height: 3px;
+            background-color: #10b981; /* Primary color */
+            border-radius: 9999px;
+            transition: background-color 0.3s;
+        }
+        .dark .section-title::after {
+            background-color: #34d399; /* Lighter primary color in dark mode */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#10b981', // Emerald-500
+                        'secondary': '#064e3b', // Emerald-900 (Dark)
+                    }
+                }
+            }
+        }
+
+        // JavaScript for Theme Toggle
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check local storage for theme preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            lucide.createIcons();
+        });
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="fixed top-4 right-4 p-3 rounded-full bg-white dark:bg-gray-700 shadow-xl text-gray-800 dark:text-white transition duration-300 z-50 hover:scale-105">
+        <i data-lucide="sun" class="w-6 h-6 dark:hidden"></i>
+        <i data-lucide="moon" class="w-6 h-6 hidden dark:block"></i>
+    </button>
+
+    <!-- Header & Hero Section -->
+    <header class="header-bg py-16 sm:py-24 text-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="flex flex-col sm:flex-row items-center sm:space-x-8">
+                <!-- Profile Image -->
+                <div class="mb-6 sm:mb-0 flex-shrink-0">
+                    <img 
+                        src="https://lh3.googleusercontent.com/pw/AP1GczPj_WWhOP7E3F9KMCVWFXJf8CfMTQNFGhMy35ovNi4_la520xoZV1Sv-sPycKFDd8Jzp4z7BuHHWtPT_1GFZzzjSM42jRkaNnasvJ6SyziuSklk_uKAO3TdCj_DBlBx1qCmwRfajKWXWJN7Ifhn_dqz7Q=w665-h911-s-no-gm?authuser=0" 
+                        alt="Junaed Al Rabby Profile" 
+                        class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white shadow-xl object-cover"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x150/10b981/ffffff?text=JR'"
+                    >
+                </div>
+                
+                <!-- Hero Text -->
+                <div class="text-center sm:text-left">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2">JUNAED AL RABBY</h1>
+                    <p class="text-xl sm:text-2xl font-light opacity-90">Ex. Office Executive</p>
+                    <div class="mt-4 flex flex-wrap justify-center sm:justify-start gap-4 text-sm font-medium">
+                        <!-- Contact Email (Phone and WhatsApp links removed) -->
+                        <a href="mailto:junaedalrabby@gmail.com" class="flex items-center space-x-1 hover:text-gray-200 transition">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            <span>junaedalrabby@gmail.com</span>
+                        </a>
+                        <span class="flex items-center space-x-1">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span>Faridpur, Bangladesh</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+
+        <!-- Summary Section -->
+        <section id="summary" class="mb-12 p-6 card shadow-lg rounded-xl border-l-4 border-primary">
+            <h2 class="text-3xl font-bold text-secondary mb-4 section-title">Professional Summary</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Versatile and highly-organized professional with a BSc in Physics, adept at managing diverse responsibilities across office administration, reception, and computer operations. Proven ability to drive operational efficiency using Microsoft 365, Google Sheets, and Adobe Photoshop for seamless workflow management and document preparation. Committed to utilizing a technical background and strong organizational abilities to ensure reliable and smooth office performance.
+            </p>
+        </section>
+
+        <!-- Experience & Education (Two-Column Layout for Desktop) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- Left Column: Experience -->
+            <div class="lg:col-span-2">
+                <section id="experience" class="mb-10">
+                    <h2 class="text-3xl font-bold text-secondary mb-6 section-title">Experience</h2>
+                    
+                    <!-- Sonet Tour & Travels -->
+                    <div class="p-6 card rounded-xl shadow-lg mb-6 transition duration-300 hover:shadow-xl dark:hover:shadow-2xl">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Office Executive</h3>
+                            <span class="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">12/2021 - 06/2024</span>
+                        </div>
+                        <p class="text-md font-medium text-gray-600 dark:text-gray-400 mb-3">Sonet Tour & Travels, Faridpur</p>
+                        <ul class="list-disc list-outside space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+                            <li>Provided reception services and managed float inquiries for customers.</li>
+                            <li>Operated computer systems for effective customer support and software operations to generate reports.</li>
+                            <li>Managed and enhanced company **social media platforms** to increase brand visibility and engagement.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Aimer's Station Coaching Center -->
+                    <div class="p-6 card rounded-xl shadow-lg transition duration-300 hover:shadow-xl dark:hover:shadow-2xl">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Office Assistant Cum Computer Operator</h3>
+                            <span class="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">2020 - 08/2021</span>
+                        </div>
+                        <p class="text-md font-medium text-gray-600 dark:text-gray-400 mb-3">Aimer's Station Coaching Center, Faridpur</p>
+                        <ul class="list-disc list-outside space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+                            <li>Assisted in office operations and handled basic administrative duties effectively.</li>
+                            <li>Managed computer operations to support all essential office functions.</li>
+                            <li>Coordinated schedules and communicated daily with institution staff and students.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="training" class="mb-10 card p-6 rounded-xl shadow-lg">
+                    <h2 class="text-3xl font-bold text-secondary mb-6 section-title">Training & Volunteering</h2>
+                    
+                    <div class="space-y-4">
+                        <!-- Training -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 flex items-center mb-1">
+                                <i data-lucide="monitor" class="w-5 h-5 mr-2 text-primary"></i> Advanced Computer Application Course
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 pl-7">Completed course covering fundamentals, Windows, MS-Office, hardware & troubleshooting, and typing in Bengali & English (30-35 WPM).</p>
+                        </div>
+                        <div class="pt-2">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 flex items-center mb-1">
+                                <i data-lucide="book-open-text" class="w-5 h-5 mr-2 text-primary"></i> Basics of Digital Marketing
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 pl-7">From: Enhancing Digital Government and Economy.</p>
+                        </div>
+                        
+                        <!-- Volunteering -->
+                        <div class="pt-4">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 flex items-center mb-1">
+                                <i data-lucide="heart" class="w-5 h-5 mr-2 text-primary"></i> BD Clean - Clean Society (2020-2022)
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 pl-7">Participated in cleaning programs, raised hygiene awareness, attended meetings, and assisted in gathering team members.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Skills & Education -->
+            <div class="lg:col-span-1 space-y-10">
+
+                <section id="skills">
+                    <h2 class="text-3xl font-bold text-secondary mb-6 section-title">Skills</h2>
+                    <div class="card p-6 rounded-xl shadow-lg space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Software & Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-pill">Google Sheets</span>
+                            <span class="skill-pill">Microsoft Office 365</span>
+                            <span class="skill-pill">Adobe Photoshop</span>
+                            <span class="skill-pill">Gmail</span>
+                            <span class="skill-pill">Social Media Management</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 pt-3">Languages</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-pill bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 hover:!bg-blue-600 hover:!text-white">Bengali (Native)</span>
+                            <span class="skill-pill bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 hover:!bg-blue-600 hover:!text-white">English (Proficient)</span>
+                            <span class="skill-pill bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 hover:!bg-blue-600 hover:!text-white">Hindi (Proficient)</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="education">
+                    <h2 class="text-3xl font-bold text-secondary mb-6 section-title">Education</h2>
+                    
+                    <div class="card p-6 rounded-xl shadow-lg space-y-6">
+                        <!-- Education Item 1 -->
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">BSc Honors in Physics</p>
+                            <p class="text-primary font-medium">National University, Dhaka Board</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Govt. Rajendra College, Faridpur | 01/2019 - 07/2025</p>
+                        </div>
+                        <div class="border-t border-gray-100 dark:border-gray-700"></div>
+                        <!-- Education Item 2 -->
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">Higher Secondary Certificate (H.S.C)</p>
+                            <p class="text-primary font-medium">Dhaka Board</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Govt. Yasin College, Faridpur | 06/2017 - 03/2019</p>
+                        </div>
+                         <div class="border-t border-gray-100 dark:border-gray-700"></div>
+                        <!-- Education Item 3 -->
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">Secondary School Certificate (S.S.C)</p>
+                            <p class="text-primary font-medium">Dhaka Board</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Baitul Mokaddem Institute, Faridpur | 02/2014 - 02/2017</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer & Social Links -->
+    <footer class="bg-secondary text-white py-8">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h3 class="text-2xl font-bold mb-4">Connect With Me</h3>
+            <div class="flex justify-center space-x-6 text-2xl">
+                <!-- LinkedIn -->
+                <a href="httpsa://linkedin.com/in/junaed-al-rabby" target="_blank" class="hover:text-primary transition-colors flex items-center space-x-2">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    <span class="hidden sm:inline text-base">LinkedIn</span>
+                </a>
+                <!-- X / Twitter -->
+                <a href="https://twitter.com/junaedalrabby" target="_blank" class="hover:text-primary transition-colors flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path d="M18.901 1.153h3.689l-8.04 9.19h8.28l-3.322 10.74h-3.689l8.03-9.19h-8.28l3.322-10.74zM8.74 1.153h3.689l-8.04 9.19h8.28l-3.322 10.74h-3.689l8.03-9.19h-8.28l3.322-10.74z"/>
+                    </svg>
+                    <span class="hidden sm:inline text-base">X / Twitter</span>
+                </a>
+                <!-- About.me -->
+                <a href="https://about.me/junaedalrabby" target="_blank" class="hover:text-primary transition-colors flex items-center space-x-2">
+                    <i data-lucide="external-link" class="w-6 h-6"></i>
+                    <span class="hidden sm:inline text-base">About.me</span>
+                </a>
+            </div>
+            <p class="mt-6 text-sm opacity-75">&copy; <span id="current-year"></span> Junaed Al Rabby. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript to set the current year in the footer -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <style>
+        /* Reusable styles for skill badges */
+        .skill-pill {
+            @apply inline-block px-4 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary transition duration-300 hover:bg-primary hover:text-white shadow-sm;
+        }
+    </style>
+</body>
+</html>
